@@ -6,6 +6,8 @@ typedef struct {
 	char name[8];
 } UserInfo;
 
+int MAX_LEN = 10;
+
 typedef struct {
 	UserInfo data[10];
 	int length;
@@ -31,6 +33,11 @@ void PrintList(SeqList L) {
 }
 
 void Insert(SeqList *L, UserInfo u, int i) {
+	if (L->length == MAX_LEN) {
+		printf("满了");
+		exit(-1);
+	}
+
 	if (!(i > 0 && i <= L->length + 1)) {
 		printf("位置参数非法,当前长度为=>%d", L->length);
 		exit(-1);
@@ -72,7 +79,7 @@ int main(void) {
 
 	printf("************************Insert*********************** \n");
 	UserInfo u5 = { 5, "e" };
-	Insert(&L, u5, 3);
+	Insert(&L, u5, 5);
 	PrintList(L);
 
 	printf("************************Delete*********************** \n");
