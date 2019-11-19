@@ -1,6 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
-
 typedef struct {
 	int id;
 	char name[8];
@@ -15,7 +12,7 @@ typedef struct {
 
 SeqList L;
 
-void Initiate() {
+void InitiateSeq() {
 	L.data[0] = (UserInfo ) { 1, "a" };
 	L.data[1] = (UserInfo ) { 2, "b" };
 	L.data[2] = (UserInfo ) { 3, "c" };
@@ -23,7 +20,7 @@ void Initiate() {
 	L.length = 4;
 }
 
-void PrintList(SeqList L) {
+void PrintSeq(SeqList L) {
 	printf("length => %d \n", L.length);
 
 	for (int i = 0; i < L.length; i++) {
@@ -32,7 +29,7 @@ void PrintList(SeqList L) {
 	}
 }
 
-void Insert(SeqList *L, UserInfo u, int i) {
+void InsertSeq(SeqList *L, UserInfo u, int i) {
 	if (L->length == MAX_LEN) {
 		printf("满了");
 		exit(-1);
@@ -50,7 +47,7 @@ void Insert(SeqList *L, UserInfo u, int i) {
 	L->length++;
 }
 
-int Locate(SeqList L, UserInfo u) {
+int LocateSeq(SeqList L, UserInfo u) {
 	int location = 0;
 	for (int i = 0; i < L.length; i++) {
 		if (L.data[i].id == u.id) {
@@ -61,7 +58,7 @@ int Locate(SeqList L, UserInfo u) {
 	return location;
 }
 
-void Delete(SeqList *L, int i) {
+void DeleteSeq(SeqList *L, int i) {
 	if (!(i > 0 && i <= L->length)) {
 		printf("位置参数非法,当前长度为=>%d", L->length);
 		exit(-1);
@@ -71,22 +68,4 @@ void Delete(SeqList *L, int i) {
 		L->data[j - 1] = L->data[j]; //依次左移
 	}
 	L->length--;
-}
-
-int main(void) {
-	Initiate();
-	PrintList(L);
-
-	printf("************************Insert*********************** \n");
-	UserInfo u5 = { 5, "e" };
-	Insert(&L, u5, 5);
-	PrintList(L);
-
-	printf("************************Delete*********************** \n");
-	Delete(&L, 1);
-	PrintList(L);
-
-	printf("************************Location*********************** \n");
-	printf("location of e is=>%d", Locate(L, (UserInfo ) { 5, "e" }));
-	return EXIT_SUCCESS;
 }
